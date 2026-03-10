@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+client/dist/
+
+# Environment
+.env
+.env.local
+.env.production
+!.env.example
+
+# Uploads (user content — not in repo)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker volumes
+pgdata/
+
+# Temp files
+*.tmp
+*.bak
+
+# Agent files (dev only)
+AGENTS.md
+DEPLOY.md

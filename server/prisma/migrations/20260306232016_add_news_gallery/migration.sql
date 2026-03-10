@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "News" ADD COLUMN     "gallery" JSONB NOT NULL DEFAULT '[]',
+ALTER COLUMN "content" DROP NOT NULL;

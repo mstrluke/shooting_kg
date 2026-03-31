@@ -50,12 +50,9 @@ export default function AdminSettingsPage() {
   if (isLoading) return <Loader />;
 
   return (
-    <div>
+    <div className="pb-20">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-semibold">Настройки</h1>
-        <Button size="sm" onClick={() => saveMut.mutate(form)} disabled={saveMut.isPending}>
-          {saved ? <><Check className="size-4 mr-1.5" /> Сохранено</> : <><Save className="size-4 mr-1.5" /> Сохранить</>}
-        </Button>
       </div>
       <div className="max-w-2xl space-y-4">
         {fieldGroups.map(g => (
@@ -68,6 +65,26 @@ export default function AdminSettingsPage() {
                   <Input type={f.type || 'text'} value={form[f.key] || ''} onChange={e => setForm({ ...form, [f.key]: e.target.value })} />
                 </div>
               ))}
+              {g.title === 'Обратный отсчет' && (
+                <label className="flex items-center gap-3 pt-2 cursor-pointer select-none">
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={form.countdown_enabled !== 'false'}
+                    onClick={() => setForm({ ...form, countdown_enabled: form.countdown_enabled === 'false' ? 'true' : 'false' })}
+                    className={`relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                      form.countdown_enabled !== 'false' ? 'bg-primary' : 'bg-muted'
+                    }`}
+                  >
+                    <span className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform duration-200 ${
+                      form.countdown_enabled !== 'false' ? 'translate-x-5' : 'translate-x-0'
+                    }`} />
+                  </button>
+                  <span className="text-sm font-medium">
+                    {form.countdown_enabled !== 'false' ? 'Отображается на сайте' : 'Скрыт на сайте'}
+                  </span>
+                </label>
+              )}
             </CardContent>
           </Card>
         ))}
@@ -108,6 +125,15 @@ export default function AdminSettingsPage() {
             ))}
           </CardContent>
         </Card>
+      </div>
+
+      {/* Sticky save button */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <div className="flex items-center justify-end gap-3 px-6 py-3 max-w-2xl">
+          <Button size="sm" onClick={() => saveMut.mutate(form)} disabled={saveMut.isPending} className="shadow-lg">
+            {saved ? <><Check className="size-4 mr-1.5" /> Сохранено</> : <><Save className="size-4 mr-1.5" /> Сохранить</>}
+          </Button>
+        </div>
       </div>
     </div>
   );

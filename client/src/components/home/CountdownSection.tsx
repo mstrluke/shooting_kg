@@ -7,7 +7,7 @@ import Countdown from '../ui/Countdown';
 export default function CountdownSection() {
   const { data: settings } = useQuery({ queryKey: ['settings'], queryFn: getSettings });
 
-  if (!settings?.countdown_date) return null;
+  if (!settings?.countdown_date || settings?.countdown_enabled === 'false') return null;
 
   return (
     <section className="relative">

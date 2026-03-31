@@ -11,7 +11,7 @@ const HERO_KEYS = HERO_PAGES.flatMap(p => [`hero_${p}`, `hero_${p}_title`, `hero
 const ALLOWED_KEYS = [
   'site_name', 'site_description', 'phone', 'email', 'address',
   'facebook', 'instagram', 'whatsapp', 'telegram',
-  'countdown_date', 'countdown_title',
+  'countdown_date', 'countdown_title', 'countdown_enabled',
   ...HERO_KEYS,
 ];
 
